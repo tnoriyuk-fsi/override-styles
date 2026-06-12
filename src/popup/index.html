@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Override Styles</title>
+    <link rel="stylesheet" href="./popup.css" />
+  </head>
+  <body>
+    <header class="header">
+      <span class="title">Override Styles</span>
+      <label class="switch" title="このホストでCSS上書きを有効化">
+        <input type="checkbox" id="toggle" />
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <div class="host-row">
+      <span class="host-label">対象ホスト:</span>
+      <span class="host-name" id="host">-</span>
+    </div>
+
+    <textarea
+      id="css"
+      class="css-input"
+      spellcheck="false"
+      placeholder="body { background: #fff !important; }"
+    ></textarea>
+
+    <div class="footer">
+      <span class="status" id="status"></span>
+      <button id="save" class="save-btn">保存</button>
+    </div>
+
+    <script type="module" src="./popup.ts"></script>
+  </body>
+</html>
