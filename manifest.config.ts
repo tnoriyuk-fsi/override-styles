@@ -3,7 +3,7 @@ import { defineManifest } from '@crxjs/vite-plugin';
 export default defineManifest({
   manifest_version: 3,
   name: 'Override Styles',
-  version: '0.1.0',
+  version: '1.0.0',
   description: 'ホストごとに任意の CSS を上書きする Google Chrome 拡張機能',
   icons: {
     '16': 'icons/icon16.png',

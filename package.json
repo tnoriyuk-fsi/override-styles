@@ -1,7 +1,7 @@
 {
   "name": "override-styles",
   "private": true,
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "ホストごとに任意の CSS を上書きする Google Chrome 拡張機能 (Manifest V3)",
   "type": "module",
   "license": "MIT",
