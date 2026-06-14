@@ -61,6 +61,16 @@ describe('getAllSettings', () => {
     const store = await getAllSettings();
     expect(store).toEqual({ 'good.com': { enabled: true, css: 'ok' } });
   });
+
+  it('css が文字列でない／null の設定値は除外する', async () => {
+    await globalThis.fakeChrome.storage.local.set({
+      'host:a.com': { enabled: true, css: 'ok' },
+      'host:b.com': { enabled: true, css: 123 },
+      'host:c.com': null,
+    });
+    const store = await getAllSettings();
+    expect(store).toEqual({ 'a.com': { enabled: true, css: 'ok' } });
+  });
 });
 
 describe('setAllSettings（全置換）', () => {
@@ -128,6 +138,17 @@ describe('watchSetting', () => {
     await saveSetting('a.com', { enabled: true, css: 'a' });
     expect(received).toEqual([]);
   });
+
+  it('local 以外のエリアの変更は無視する', () => {
+    const received: unknown[] = [];
+    const unwatch = watchSetting('a.com', (s) => received.push(s));
+    globalThis.fakeChrome._emit(
+      { 'host:a.com': { newValue: { enabled: true, css: 'a' } } },
+      'sync',
+    );
+    expect(received).toEqual([]);
+    unwatch();
+  });
 });
 
 describe('watchAllSettings', () => {
@@ -143,6 +164,17 @@ describe('watchAllSettings', () => {
     let count = 0;
     const unwatch = watchAllSettings(() => count++);
     await globalThis.fakeChrome.storage.local.set({ other: 'x' });
+    expect(count).toBe(0);
+    unwatch();
+  });
+
+  it('local 以外のエリアの変更は無視する', () => {
+    let count = 0;
+    const unwatch = watchAllSettings(() => count++);
+    globalThis.fakeChrome._emit(
+      { 'host:a.com': { newValue: { enabled: true, css: 'a' } } },
+      'sync',
+    );
     expect(count).toBe(0);
     unwatch();
   });
@@ -177,12 +209,22 @@ describe('parseImport', () => {
     expect(result.hosts).toEqual(store);
   });
 
+  it('exportedAt が無い場合は空文字になる', () => {
+    const json = JSON.stringify({ version: EXPORT_VERSION, hosts: {} });
+    const result = parseImport(json);
+    expect(result.exportedAt).toBe('');
+  });
+
   it('壊れた JSON は throw する', () => {
     expect(() => parseImport('{ broken')).toThrow();
   });
 
   it('オブジェクトでない（配列）は throw する', () => {
     expect(() => parseImport('[]')).toThrow();
+  });
+
+  it('null は throw する', () => {
+    expect(() => parseImport('null')).toThrow();
   });
 
   it('version が無い場合は throw する', () => {

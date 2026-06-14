@@ -26,6 +26,8 @@ export interface FakeChrome {
   };
   /** テスト補助: ストアの中身を直接覗く */
   _dump(): Record<string, unknown>;
+  /** テスト補助: 任意のエリア名で onChanged を発火する */
+  _emit(changes: Record<string, StorageChange>, areaName: string): void;
 }
 
 export function createFakeChrome(): FakeChrome {
@@ -94,6 +96,11 @@ export function createFakeChrome(): FakeChrome {
     },
     _dump() {
       return Object.fromEntries(store);
+    },
+    _emit(changes, areaName) {
+      for (const listener of listeners) {
+        listener(changes, areaName);
+      }
     },
   };
 }
