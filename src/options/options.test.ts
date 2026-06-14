@@ -31,9 +31,9 @@ describe('options 一覧表示', () => {
     await importOptions();
     await waitReady();
 
-    const names = Array.from(
-      document.querySelectorAll('#list .host-name'),
-    ).map((el) => el.textContent);
+    const names = Array.from(document.querySelectorAll('#list .host-name')).map(
+      (el) => el.textContent,
+    );
     expect(names).toEqual(['a.com', 'b.com']);
     expect(document.getElementById('count')?.textContent).toBe('2');
   });
@@ -41,9 +41,9 @@ describe('options 一覧表示', () => {
   it('設定が無いときは空表示になる', async () => {
     await importOptions();
     await vi.waitFor(() => {
-      expect(
-        (document.getElementById('empty') as HTMLDivElement).hidden,
-      ).toBe(false);
+      expect((document.getElementById('empty') as HTMLDivElement).hidden).toBe(
+        false,
+      );
     });
     expect(document.getElementById('count')?.textContent).toBe('0');
   });
@@ -120,7 +120,7 @@ describe('options インポート/エクスポート', () => {
     await vi.waitFor(() => {
       expect(clickSpy).toHaveBeenCalled();
     });
-    const anchor = clickSpy.mock.instances[0] as HTMLAnchorElement;
+    const anchor = clickSpy.mock.instances[0] as unknown as HTMLAnchorElement;
     expect(anchor.download).toMatch(/^override-styles-backup-\d{8}\.json$/);
   });
 

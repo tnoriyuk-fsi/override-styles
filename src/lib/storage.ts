@@ -132,7 +132,9 @@ export function parseImport(text: string): ExportData {
   try {
     parsed = JSON.parse(text);
   } catch {
-    throw new Error('JSONとして解析できません。ファイル形式を確認してください。');
+    throw new Error(
+      'JSONとして解析できません。ファイル形式を確認してください。',
+    );
   }
   if (typeof parsed !== 'object' || parsed === null) {
     throw new Error('不正な形式です（オブジェクトではありません）。');

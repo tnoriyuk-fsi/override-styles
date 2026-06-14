@@ -5,9 +5,7 @@ export const STYLE_ELEMENT_ID = 'override-styles-injected';
 
 /** CSS を適用する。既存の style 要素があれば内容を更新する。 */
 export function applyCss(css: string, doc: Document = document): void {
-  let style = doc.getElementById(
-    STYLE_ELEMENT_ID,
-  ) as HTMLStyleElement | null;
+  let style = doc.getElementById(STYLE_ELEMENT_ID) as HTMLStyleElement | null;
 
   if (!style) {
     style = doc.createElement('style');

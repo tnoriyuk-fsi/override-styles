@@ -12,9 +12,7 @@ type ChangeListener = (
 export interface FakeChrome {
   storage: {
     local: {
-      get(
-        keys?: string | string[] | null,
-      ): Promise<Record<string, unknown>>;
+      get(keys?: string | string[] | null): Promise<Record<string, unknown>>;
       set(items: Record<string, unknown>): Promise<void>;
       remove(keys: string | string[]): Promise<void>;
       clear(): Promise<void>;

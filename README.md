@@ -59,6 +59,16 @@ npm run test:cov   # カバレッジ付き
 
 `chrome.storage` はインメモリのフェイク（`test/fakeChrome.ts`）に差し替えて検証します。
 
+## Lint / Format
+
+[ESLint](https://eslint.org/)（typescript-eslint）と [Prettier](https://prettier.io/) を使用します。
+
+```bash
+npm run lint         # ESLint チェック
+npm run format       # Prettier で整形
+npm run format:check # 整形差分のチェック（変更しない）
+```
+
 ## Chrome への読み込み
 
 1. Chrome で `chrome://extensions` を開く

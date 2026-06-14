@@ -3,7 +3,6 @@ import { createFakeChrome, type FakeChrome } from './fakeChrome';
 
 declare global {
   // テストから現在のフェイクへアクセスするためのハンドル
-  // eslint-disable-next-line no-var
   var fakeChrome: FakeChrome;
 }
 
