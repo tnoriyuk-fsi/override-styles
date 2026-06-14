@@ -5,6 +5,9 @@ const toggleEl = document.getElementById('toggle') as HTMLInputElement;
 const cssEl = document.getElementById('css') as HTMLTextAreaElement;
 const saveBtn = document.getElementById('save') as HTMLButtonElement;
 const statusEl = document.getElementById('status') as HTMLSpanElement;
+const openOptionsEl = document.getElementById(
+  'open-options',
+) as HTMLAnchorElement;
 
 let currentHost = '';
 
@@ -41,6 +44,12 @@ async function save(): Promise<void> {
 }
 
 async function init(): Promise<void> {
+  // 設定一覧（オプションページ）を開く導線。ホストの有無に関わらず有効。
+  openOptionsEl.addEventListener('click', (e) => {
+    e.preventDefault();
+    chrome.runtime.openOptionsPage();
+  });
+
   const host = await getActiveHost();
 
   if (!host) {

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Override Styles の設定</title>
+    <link rel="stylesheet" href="./options.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="page-header">
+        <h1>Override Styles の設定</h1>
+        <p class="lead">ホストごとのCSS上書き設定を管理します。</p>
+      </header>
+
+      <section class="backup">
+        <h2>バックアップ</h2>
+        <p class="note">
+          設定を失わないために、定期的なエクスポートをおすすめします。
+          インポートは<strong>現在の設定をすべて置き換えます</strong>。
+          先にエクスポートしてバックアップしてください。
+        </p>
+        <div class="backup-actions">
+          <button id="export" class="btn">エクスポート (JSON)</button>
+          <button id="import" class="btn btn-secondary">インポート (全置換)</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden />
+        </div>
+        <p class="message" id="message"></p>
+      </section>
+
+      <section class="list-section">
+        <div class="list-header">
+          <h2>登録済みホスト (<span id="count">0</span>)</h2>
+        </div>
+        <div id="empty" class="empty" hidden>
+          まだ設定がありません。各サイトでポップアップからCSSを保存すると、ここに表示されます。
+        </div>
+        <ul id="list" class="host-list"></ul>
+      </section>
+    </div>
+
+    <template id="row-template">
+      <li class="host-item">
+        <div class="host-row">
+          <label class="switch" title="このホストでCSS上書きを有効化">
+            <input type="checkbox" class="row-toggle" />
+            <span class="slider"></span>
+          </label>
+          <span class="host-name"></span>
+          <span class="css-summary"></span>
+          <div class="row-actions">
+            <button class="btn btn-small row-edit">編集</button>
+            <button class="btn btn-small btn-danger row-delete">削除</button>
+          </div>
+        </div>
+        <div class="editor" hidden>
+          <textarea class="row-css" spellcheck="false"></textarea>
+          <div class="editor-actions">
+            <button class="btn btn-small row-save">保存</button>
+            <button class="btn btn-small btn-secondary row-cancel">キャンセル</button>
+          </div>
+        </div>
+      </li>
+    </template>
+
+    <script type="module" src="./options.ts"></script>
+  </body>
+</html>

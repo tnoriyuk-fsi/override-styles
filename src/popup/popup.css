@@ -70,6 +70,23 @@ body {
   padding: 4px 12px 12px;
 }
 
+.options-link-row {
+  padding: 0 12px 12px;
+  border-top: 1px solid #e5e7eb;
+  padding-top: 10px;
+  text-align: right;
+}
+
+.options-link {
+  color: #2563eb;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.options-link:hover {
+  text-decoration: underline;
+}
+
 .status {
   color: #16a34a;
   font-size: 12px;
