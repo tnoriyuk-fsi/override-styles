@@ -1,7 +1,13 @@
 // dist/ を Chrome Web Store 配布用 zip にまとめるスクリプト。
 // `npm run zip`（build 後に実行）で release/override-styles-v<version>.zip を生成する。
 // manifest.json が zip のルートに来るよう dist の中身を格納する。依存なし。
-import { createWriteStream, mkdirSync, readdirSync, statSync, readFileSync } from 'node:fs';
+import {
+  createWriteStream,
+  mkdirSync,
+  readdirSync,
+  statSync,
+  readFileSync,
+} from 'node:fs';
 import { deflateRawSync } from 'node:zlib';
 import { fileURLToPath } from 'node:url';
 import { dirname, join, relative, sep } from 'node:path';
@@ -118,7 +124,9 @@ function buildZip(files) {
 try {
   statSync(DIST_DIR);
 } catch {
-  console.error('dist/ が見つかりません。先に `npm run build` を実行してください。');
+  console.error(
+    'dist/ が見つかりません。先に `npm run build` を実行してください。',
+  );
   process.exit(1);
 }
 
@@ -134,5 +142,7 @@ const stream = createWriteStream(OUT_FILE);
 stream.write(zip);
 stream.end();
 stream.on('finish', () => {
-  console.log(`created ${relative(ROOT, OUT_FILE)} (${zip.length} bytes, ${files.length} files)`);
+  console.log(
+    `created ${relative(ROOT, OUT_FILE)} (${zip.length} bytes, ${files.length} files)`,
+  );
 });

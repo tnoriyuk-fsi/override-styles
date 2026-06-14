@@ -1,5 +1,7 @@
 # Override Styles
 
+[![CI](https://github.com/tnoriyuk-fsi/override-styles/actions/workflows/ci.yml/badge.svg)](https://github.com/tnoriyuk-fsi/override-styles/actions/workflows/ci.yml)
+
 ホストごとに任意の CSS を上書きする Google Chrome 拡張機能（Manifest V3）です。
 
 表示中のページに独自の CSS を注入してデザインを上書きできます。設定はホスト単位（例: `www.example.com`）で保存され、サイトごとに有効・無効を切り替えられます。
@@ -43,6 +45,28 @@ npm run build
 
 ```bash
 npm run dev
+```
+
+## テスト
+
+[Vitest](https://vitest.dev/) を使った単体テストを用意しています。
+
+```bash
+npm test          # 1 回実行
+npm run test:watch # ウォッチモード
+npm run test:cov   # カバレッジ付き
+```
+
+`chrome.storage` はインメモリのフェイク（`test/fakeChrome.ts`）に差し替えて検証します。
+
+## Lint / Format
+
+[ESLint](https://eslint.org/)（typescript-eslint）と [Prettier](https://prettier.io/) を使用します。
+
+```bash
+npm run lint         # ESLint チェック
+npm run format       # Prettier で整形
+npm run format:check # 整形差分のチェック（変更しない）
 ```
 
 ## Chrome への読み込み
@@ -107,6 +131,7 @@ override-styles/
 │  │  └─ storage.ts     # chrome.storage アクセス層
 │  ├─ popup/            # ツールバーのポップアップ UI
 │  └─ options/          # オプションページ（一覧・import/export）
+├─ test/                # テスト補助（chrome フェイク・セットアップ）
 ├─ release/              # 配布 zip の出力先（Git 管理外）
 └─ docs/
    └─ PLAN.md           # 実装計画
