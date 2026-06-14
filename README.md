@@ -52,6 +52,16 @@ npm run dev
 3. **「パッケージ化されていない拡張機能を読み込む」** をクリック
 4. このプロジェクトの `dist/` フォルダを選択する
 
+## 配布用 zip の作成
+
+Chrome Web Store へのアップロード用 zip を生成します。
+
+```bash
+npm run zip
+```
+
+`npm run build` を実行した上で、`release/override-styles-v<version>.zip`（ルートに `manifest.json` を含む）を出力します。`release/` は Git 管理外です。
+
 ## 使い方
 
 ### CSS を上書きする
@@ -88,7 +98,8 @@ override-styles/
 ├─ vite.config.ts       # Vite + crxjs 設定
 ├─ icons/               # 拡張機能アイコン
 ├─ scripts/
-│  └─ generate-icons.mjs # アイコン生成スクリプト（依存なし）
+│  ├─ generate-icons.mjs # アイコン生成スクリプト（依存なし）
+│  └─ make-zip.mjs       # 配布 zip 生成スクリプト（依存なし）
 ├─ src/
 │  ├─ content.ts        # CSS を注入する content script
 │  ├─ lib/
@@ -96,6 +107,7 @@ override-styles/
 │  │  └─ storage.ts     # chrome.storage アクセス層
 │  ├─ popup/            # ツールバーのポップアップ UI
 │  └─ options/          # オプションページ（一覧・import/export）
+├─ release/              # 配布 zip の出力先（Git 管理外）
 └─ docs/
    └─ PLAN.md           # 実装計画
 ```
