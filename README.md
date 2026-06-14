@@ -45,6 +45,18 @@ npm run build
 npm run dev
 ```
 
+## テスト
+
+[Vitest](https://vitest.dev/) を使った単体テストを用意しています。
+
+```bash
+npm test          # 1 回実行
+npm run test:watch # ウォッチモード
+npm run test:cov   # カバレッジ付き
+```
+
+`chrome.storage` はインメモリのフェイク（`test/fakeChrome.ts`）に差し替えて検証します。
+
 ## Chrome への読み込み
 
 1. Chrome で `chrome://extensions` を開く
@@ -107,6 +119,7 @@ override-styles/
 │  │  └─ storage.ts     # chrome.storage アクセス層
 │  ├─ popup/            # ツールバーのポップアップ UI
 │  └─ options/          # オプションページ（一覧・import/export）
+├─ test/                # テスト補助（chrome フェイク・セットアップ）
 ├─ release/              # 配布 zip の出力先（Git 管理外）
 └─ docs/
    └─ PLAN.md           # 実装計画
