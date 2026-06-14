@@ -1,5 +1,7 @@
 # Override Styles
 
+[![CI](https://github.com/tnoriyuk-fsi/override-styles/actions/workflows/ci.yml/badge.svg)](https://github.com/tnoriyuk-fsi/override-styles/actions/workflows/ci.yml)
+
 ホストごとに任意の CSS を上書きする Google Chrome 拡張機能（Manifest V3）です。
 
 表示中のページに独自の CSS を注入してデザインを上書きできます。設定はホスト単位（例: `www.example.com`）で保存され、サイトごとに有効・無効を切り替えられます。
