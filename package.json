@@ -2,8 +2,18 @@
   "name": "override-styles",
   "private": true,
   "version": "0.1.0",
-  "description": "CSS上書き",
+  "description": "ホストごとに任意の CSS を上書きする Google Chrome 拡張機能 (Manifest V3)",
   "type": "module",
+  "license": "MIT",
+  "author": "tnoriyuk-fsi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tnoriyuk-fsi/override-styles.git"
+  },
+  "homepage": "https://github.com/tnoriyuk-fsi/override-styles#readme",
+  "bugs": {
+    "url": "https://github.com/tnoriyuk-fsi/override-styles/issues"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
