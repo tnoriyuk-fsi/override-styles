@@ -30,4 +30,5 @@ export default defineManifest({
       '128': 'icons/icon128.png',
     },
   },
+  options_page: 'src/options/index.html',
 });
