@@ -31,6 +31,6 @@
 
 ## 関連リンク
 
-- [README](../README.md) — プロジェクト概要
-- [変更履歴（CHANGELOG）](../CHANGELOG.md) — リリースごとの変更点
-- [プロジェクト規約](../.github/copilot-instructions.md) — 人間・AI 共通の規約
+- [README](https://github.com/tnoriyuk-fsi/override-styles/blob/main/README.md) — プロジェクト概要
+- [変更履歴（CHANGELOG）](https://github.com/tnoriyuk-fsi/override-styles/blob/main/CHANGELOG.md) — リリースごとの変更点
+- [プロジェクト規約](https://github.com/tnoriyuk-fsi/override-styles/blob/main/.github/copilot-instructions.md) — 人間・AI 共通の規約
