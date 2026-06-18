@@ -1,3 +1,53 @@
+# プロジェクト規約（Override Styles）
+
+このリポジトリで作業する人間・AI エージェントが共通して従う規約。
+ビルド・テスト・ブランチ運用・アーキテクチャ・コミットメッセージの取り決めをここに集約する。
+
+## プロジェクト概要
+
+- ホストごとに任意の CSS を上書きする Google Chrome 拡張機能（Manifest V3）。
+- TypeScript + Vite 5 + `@crxjs/vite-plugin`。設定は `chrome.storage.local` に保存（キー接頭辞 `host:`）。
+
+## ビルド・テスト・Lint コマンド
+
+| 目的           | コマンド               |
+|----------------|------------------------|
+| 開発サーバ     | `npm run dev`          |
+| 本番ビルド     | `npm run build`（`tsc --noEmit && vite build`） |
+| テスト         | `npm test`（`vitest run`） |
+| テスト（監視） | `npm run test:watch`   |
+| カバレッジ     | `npm run test:cov`     |
+| Lint           | `npm run lint`         |
+| 整形           | `npm run format`       |
+| 整形チェック   | `npm run format:check` |
+
+- 開発環境: Node は `.nvmrc`（22）に従う。`package.json` の `engines`（node >=20 / npm >=10）を満たすこと。
+
+## ブランチ運用
+
+- `main` は保護ブランチ。**直接 push・force push・ブランチ削除は禁止**。
+- 変更は必ず **作業ブランチ → Pull Request → CI（build-and-test）green → squash マージ** の流れで行う。
+- ブランチ名は `<type>/<issue番号>-<短い説明>`（例: `chore/13-dev-environment`）。
+- マージ後は作業ブランチを削除する。
+- 1 Issue = 1 PR を基本とし、PR 説明に `Closes #<番号>` を書いてクローズする（コミットは `Refs:` のみ）。
+
+## テスト方針
+
+- フレームワークは Vitest + jsdom。テストは実装と同じ場所に `*.test.ts` で置く。
+- `chrome` API は `test/fakeChrome.ts` のインメモリ実装を `test/setup.ts` で注入する（実ブラウザ不要）。
+- `src/lib/`（`storage.ts` / `inject.ts`）はロジックの中核なのでカバレッジ 100% を維持する。
+- 変更を加えたら必ず `npm run lint && npm run format:check && npm run build && npm test` がすべて緑であることを確認してから PR を出す（CI と同等）。
+
+## アーキテクチャ要点
+
+- `src/content.ts`: 各ページに注入されるブートストラップ。`src/lib/inject.ts` の `render` で `<style id="override-styles-injected">` を適用する。
+- `src/lib/storage.ts`: `chrome.storage.local` へのアクセス層（取得・保存・監視・import/export）。
+- `src/popup/`: ツールバーのポップアップ UI（現在ホストの設定編集）。
+- `src/options/`: オプションページ（全ホストの一覧・import/export）。
+- popup / options は拡張自身のページで動作し、ページ側 CSP の影響を受けない。content script のみ注入先ページの制約を受ける点に注意する。
+
+---
+
 # コミットメッセージ生成ルール（Conventional Commits + Gitmoji）
 
 Copilot がコミットメッセージを生成する際は、以下の形式に従うこと。
@@ -79,3 +129,19 @@ Refs: #789
 - ヘッダ / body / footer の間の空行（各1行）を守る。
 - 課題リンクのフッターはコミットでは `Refs:` のみとし、閉じキーワード（`Closes`/`Fixes` 等）は書かない（クローズは PR 説明で行う）。
 - ルールに沿わない既存メッセージを見つけた場合は、修正案を例とともに提示する。
+
+---
+
+# ドキュメント更新ポリシー
+
+このワークスペースはテンプレート化を見据えた**パイロット**であり、規約・設定・ドキュメントは「育てる」前提で運用する。確定したものとして固定せず、より良い方法があれば積極的に見直す。
+
+## 更新の進め方
+
+- AI エージェントは、規約・設定・ドキュメントに改善余地を見つけたら、現状維持に固執せず「追加しますか？」「変更しますか？」と**提案**する。
+- 提案の際は、可能な限り**グローバルスタンダード／ベストプラクティス**の観点も併せて示す。
+- 変更は本人の確認を得てから反映し、勝手に確定させない。
+
+## 取り扱いに注意するファイル（ユーザー資産）
+
+- `.github/copilot-instructions.md` の「コミットメッセージ生成ルール」セクションと `.github/pull_request_template.md` はユーザー資産。改変する場合は必ず事前に確認する（Prettier の整形対象からも除外済み）。
