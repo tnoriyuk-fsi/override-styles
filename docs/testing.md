@@ -15,12 +15,12 @@ npm run test:cov   # カバレッジ付き
 
 ## chrome API のフェイク
 
-実ブラウザを使わずに `chrome.storage` などを検証するため、インメモリのフェイク（[`test/fakeChrome.ts`](../test/fakeChrome.ts)）を [`test/setup.ts`](../test/setup.ts) で各テスト前に注入します。
+実ブラウザを使わずに `chrome.storage` などを検証するため、インメモリのフェイク（[`test/fakeChrome.ts`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/test/fakeChrome.ts)）を [`test/setup.ts`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/test/setup.ts) で各テスト前に注入します。
 
 - `onChanged` のイベント発火を再現
 - `_dump()` / `_emit()` などのテスト補助を提供
 
-HTML を使う結合テストでは [`test/loadHtml.ts`](../test/loadHtml.ts) で実ファイルの HTML を読み込み、`<script>` を除去して `document.body` に流し込みます。
+HTML を使う結合テストでは [`test/loadHtml.ts`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/test/loadHtml.ts) で実ファイルの HTML を読み込み、`<script>` を除去して `document.body` に流し込みます。
 
 ## カバレッジ方針
 

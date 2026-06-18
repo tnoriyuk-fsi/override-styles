@@ -4,3 +4,5 @@ coverage
 *.log
 .DS_Store
 release/
+docs/.vitepress/dist
+docs/.vitepress/cache

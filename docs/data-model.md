@@ -1,6 +1,6 @@
 # データモデル
 
-設定の保存形式と、import/export で扱う JSON 形式をまとめます。型の実体は [`src/lib/types.ts`](../src/lib/types.ts) を参照してください。
+設定の保存形式と、import/export で扱う JSON 形式をまとめます。型の実体は [`src/lib/types.ts`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/src/lib/types.ts) を参照してください。
 
 ## ストレージ
 
@@ -61,4 +61,4 @@ interface ExportData {
 - `version` が現在の `EXPORT_VERSION` より新しい場合は「未対応バージョン」として拒否する。
 - インポートは **全置換**（既存の `host:` キーをすべて削除してから書き込む）。実行前のエクスポート（バックアップ）を推奨する。
 
-実装は [`src/lib/storage.ts`](../src/lib/storage.ts) の `parseImport` / `serializeExport` / `setAllSettings` を参照。
+実装は [`src/lib/storage.ts`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/src/lib/storage.ts) の `parseImport` / `serializeExport` / `setAllSettings` を参照。

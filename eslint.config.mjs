@@ -5,7 +5,14 @@ import globals from 'globals';
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'coverage', 'release', 'node_modules'],
+    ignores: [
+      'dist',
+      'coverage',
+      'release',
+      'node_modules',
+      'docs/.vitepress/dist',
+      'docs/.vitepress/cache',
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -17,6 +24,12 @@ export default tseslint.config(
   },
   {
     files: ['scripts/**/*.mjs'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+  },
+  {
+    files: ['docs/.vitepress/**/*.ts'],
     languageOptions: {
       globals: { ...globals.node },
     },

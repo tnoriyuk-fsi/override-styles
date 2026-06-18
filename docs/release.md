@@ -2,7 +2,7 @@
 
 ## バージョニング
 
-[Semantic Versioning](https://semver.org/lang/ja/) に従う（`MAJOR.MINOR.PATCH`）。バージョンは [`package.json`](../package.json) と [`manifest.config.ts`](../manifest.config.ts) で一致させる。
+[Semantic Versioning](https://semver.org/lang/ja/) に従う（`MAJOR.MINOR.PATCH`）。バージョンは [`package.json`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/package.json) と [`manifest.config.ts`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/manifest.config.ts) で一致させる。
 
 ## 配布用 zip の作成
 
@@ -32,4 +32,4 @@ git tag v<version>
 git push origin v<version>
 ```
 
-変更点は [CHANGELOG](../CHANGELOG.md) に記録する（issue #11）。
+変更点は [CHANGELOG](https://github.com/tnoriyuk-fsi/override-styles/blob/main/CHANGELOG.md) に記録する（issue #11）。

@@ -139,8 +139,20 @@ override-styles/
 │  └─ options/          # オプションページ（一覧・import/export）
 ├─ test/                # テスト補助（chrome フェイク・セットアップ）
 ├─ release/              # 配布 zip の出力先（Git 管理外）
-└─ docs/
-   └─ PLAN.md           # 実装計画
+└─ docs/                 # 設計ドキュメント（VitePress でサイト公開）
+```
+
+## ドキュメント
+
+設計・開発ドキュメントは VitePress でサイト公開しています。
+
+- サイト: <https://tnoriyuk-fsi.github.io/override-styles/>
+- ソース: [`docs/`](./docs/)
+
+ローカルでプレビューする場合:
+
+```bash
+npm run docs:dev
 ```
 
 ## ライセンス

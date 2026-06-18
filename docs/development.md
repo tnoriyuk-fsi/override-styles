@@ -2,7 +2,7 @@
 
 ## 前提
 
-- Node.js >= 20（開発は [`.nvmrc`](../.nvmrc) の 22 を推奨）
+- Node.js >= 20（開発は [`.nvmrc`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/.nvmrc) の 22 を推奨）
 - npm >= 10
 - Google Chrome（または Chromium 系ブラウザ）
 
@@ -65,4 +65,4 @@ npm run lint && npm run format:check && npm run build && npm test
 - 作業ブランチ → Pull Request → CI green → squash マージ。
 - ブランチ名は `<type>/<issue番号>-<短い説明>`（例: `docs/24-docs-foundation`）。
 
-詳細は [プロジェクト規約](../.github/copilot-instructions.md) を参照。
+詳細は [プロジェクト規約](https://github.com/tnoriyuk-fsi/override-styles/blob/main/.github/copilot-instructions.md) を参照。
