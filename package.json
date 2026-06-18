@@ -32,7 +32,8 @@
     "docs:preview": "vitepress preview docs",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format:check": "prettier --check .",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.28",
@@ -43,7 +44,9 @@
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.6.0",
+    "husky": "^9.1.7",
     "jsdom": "^29.1.1",
+    "lint-staged": "^17.0.7",
     "mermaid": "^11.15.0",
     "prettier": "^3.8.4",
     "typescript": "^5.6.3",
@@ -52,5 +55,14 @@
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17",
     "vitest": "^2.1.9"
+  },
+  "lint-staged": {
+    "*.{ts,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{js,json,md,css,html,yml,yaml}": [
+      "prettier --write --ignore-unknown"
+    ]
   }
 }

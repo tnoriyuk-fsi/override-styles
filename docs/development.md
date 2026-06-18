@@ -51,6 +51,16 @@ npm run format       # Prettier で整形
 npm run format:check # 整形差分のチェック（変更しない）
 ```
 
+## コミット時の自動整形
+
+[husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/lint-staged/lint-staged) により、`git commit` 時に **ステージ済みファイルへ自動で `eslint --fix` と `prettier --write`** が実行されます。`npm install` を実行すれば（`package.json` の `prepare` スクリプト経由で）フックが自動的に有効化されるため、追加の設定は不要です。
+
+- フック本体: [`.husky/pre-commit`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/.husky/pre-commit)（`npx lint-staged` を実行）
+- 対象と処理: `package.json` の `lint-staged` 設定に従い、`.ts` / `.mjs` には `eslint --fix` + `prettier --write`、その他のファイルには `prettier --write` を適用
+- 効果: 整形・Lint 漏れによる CI の失敗をコミット前に防ぐ
+
+修正できない Lint エラーがある場合はコミットが中断されるので、エラーを解消してから再度コミットしてください。
+
 ## コミット前チェック
 
 PR を出す前に、CI と同等のチェックがすべて緑であることを確認します。
