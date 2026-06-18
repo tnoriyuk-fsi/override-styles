@@ -36,9 +36,9 @@
     "prepare": "husky"
   },
   "devDependencies": {
-    "@crxjs/vite-plugin": "^2.0.0-beta.28",
+    "@crxjs/vite-plugin": "^2.6.1",
     "@eslint/js": "^9.39.4",
-    "@types/chrome": "^0.0.287",
+    "@types/chrome": "^0.1.43",
     "@types/node": "^25.9.3",
     "@vitest/coverage-v8": "^2.1.9",
     "eslint": "^9.39.4",
@@ -50,7 +50,7 @@
     "mermaid": "^11.15.0",
     "prettier": "^3.8.4",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.61.0",
+    "typescript-eslint": "^8.61.1",
     "vite": "^5.4.10",
     "vitepress": "^1.6.4",
     "vitepress-plugin-mermaid": "^2.0.17",
