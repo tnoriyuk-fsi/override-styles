@@ -22,138 +22,34 @@
 - Vite + [`@crxjs/vite-plugin`](https://github.com/crxjs/chrome-extension-tools)
 - ストレージ: `chrome.storage.local`
 
-## 動作要件
+## 動作環境
 
-- Node.js >= 20（開発は `.nvmrc` の 22 を推奨）
 - Google Chrome（または Chromium 系ブラウザ）
 
-## セットアップ
-
-```bash
-npm install
-```
-
-## ビルド
-
-```bash
-npm run build
-```
-
-`dist/` に拡張機能一式が出力されます。
-
-開発時はホットリロードが使えます。
-
-```bash
-npm run dev
-```
-
-## テスト
-
-[Vitest](https://vitest.dev/) を使った単体テストを用意しています。
-
-```bash
-npm test          # 1 回実行
-npm run test:watch # ウォッチモード
-npm run test:cov   # カバレッジ付き
-```
-
-`chrome.storage` はインメモリのフェイク（`test/fakeChrome.ts`）に差し替えて検証します。
-
-## Lint / Format
-
-[ESLint](https://eslint.org/)（typescript-eslint）と [Prettier](https://prettier.io/) を使用します。
-
-```bash
-npm run lint         # ESLint チェック
-npm run format       # Prettier で整形
-npm run format:check # 整形差分のチェック（変更しない）
-```
-
-## Chrome への読み込み
-
-1. Chrome で `chrome://extensions` を開く
-2. 右上の **デベロッパーモード** を ON にする
-3. **「パッケージ化されていない拡張機能を読み込む」** をクリック
-4. このプロジェクトの `dist/` フォルダを選択する
-
-## 配布用 zip の作成
-
-Chrome Web Store へのアップロード用 zip を生成します。
-
-```bash
-npm run zip
-```
-
-`npm run build` を実行した上で、`release/override-styles-v<version>.zip`（ルートに `manifest.json` を含む）を出力します。`release/` は Git 管理外です。
-
 ## 使い方
-
-### CSS を上書きする
 
 1. 任意のサイトを開き、ツールバーの拡張機能アイコンをクリック
 2. CSS 入力欄に上書きしたい CSS を入力（例: `body { background: #f5f5f5 !important; }`）
 3. 右上のトグルを ON にして **保存**（または `Ctrl` / `Cmd` + `Enter`）
 
-設定したホストを再訪問すると、自動的に CSS が適用されます。
+オプションページでは、登録済みホストの一覧・編集・削除や、設定の import / export（バックアップ）ができます。
 
-### 設定を管理する
-
-ポップアップの「設定一覧を開く」、または `chrome://extensions` の拡張機能詳細から **オプション** を開くと、登録済みホストの一覧を表示できます。
-
-- 各ホストの ON/OFF 切り替え
-- CSS のその場編集
-- ホスト設定の削除
-
-### バックアップ（インポート / エクスポート）
-
-オプションページの **バックアップ** セクションから操作します。
-
-- **エクスポート**: 全ホストの設定を JSON ファイルとして保存
-- **インポート**: JSON ファイルを読み込み、**現在の設定をすべて置き換え**
-
-> [!IMPORTANT]
-> インポートは現在の設定をすべて上書きします。実行前に必ずエクスポートでバックアップしてください。
-
-## プロジェクト構成
-
-```text
-override-styles/
-├─ manifest.config.ts   # MV3 マニフェスト定義
-├─ vite.config.ts       # Vite + crxjs 設定
-├─ vitest.config.ts     # Vitest 設定（jsdom 環境）
-├─ eslint.config.mjs    # ESLint 設定（flat config）
-├─ .nvmrc               # 開発用 Node バージョン（22）
-├─ .editorconfig        # エディタ共通設定
-├─ .gitattributes       # 改行コード等の Git 属性
-├─ icons/               # 拡張機能アイコン
-├─ scripts/
-│  ├─ generate-icons.mjs # アイコン生成スクリプト（依存なし）
-│  └─ make-zip.mjs       # 配布 zip 生成スクリプト（依存なし）
-├─ src/
-│  ├─ content.ts        # CSS を注入するブートストラップ content script
-│  ├─ lib/
-│  │  ├─ types.ts       # 型定義
-│  │  ├─ storage.ts     # chrome.storage アクセス層
-│  │  └─ inject.ts      # CSS 注入ロジック（style 要素の適用・解除）
-│  ├─ popup/            # ツールバーのポップアップ UI
-│  └─ options/          # オプションページ（一覧・import/export）
-├─ test/                # テスト補助（chrome フェイク・セットアップ）
-├─ release/              # 配布 zip の出力先（Git 管理外）
-└─ docs/                 # 設計ドキュメント（VitePress でサイト公開）
-```
+詳しい使い方は [ユーザーガイド](https://tnoriyuk-fsi.github.io/override-styles/user-guide) を参照してください。
 
 ## ドキュメント
 
-設計・開発ドキュメントは VitePress でサイト公開しています。
+設計・開発ドキュメントは VitePress で **サイト公開** しています。
 
 - サイト: <https://tnoriyuk-fsi.github.io/override-styles/>
 - ソース: [`docs/`](./docs/)
 
-ローカルでプレビューする場合:
+開発に参加する場合の入口:
 
-```bash
-npm run docs:dev
-```
+- [ユーザーガイド](https://tnoriyuk-fsi.github.io/override-styles/user-guide) — 利用者向けの使い方
+- [開発ガイド](https://tnoriyuk-fsi.github.io/override-styles/development) — セットアップ・ビルド・Chrome への読み込み・ブランチ運用
+- [テスト方針](https://tnoriyuk-fsi.github.io/override-styles/testing) — テスト構成とカバレッジ方針
+- [アーキテクチャ](https://tnoriyuk-fsi.github.io/override-styles/architecture) — システム構成・データフロー・プロジェクト構成
+- [リリース手順](https://tnoriyuk-fsi.github.io/override-styles/release) — zip 作成・Web Store 申請・タグ付け
 
 ## ライセンス
 

@@ -30,6 +30,34 @@ graph LR
 
 > popup / options は拡張自身のページ（`chrome-extension://`）で動作し、ページ側 CSP の影響を受けません。content script のみ注入先ページの制約を受けます。
 
+## ディレクトリ構成
+
+```text
+override-styles/
+├─ manifest.config.ts   # MV3 マニフェスト定義
+├─ vite.config.ts       # Vite + crxjs 設定
+├─ vitest.config.ts     # Vitest 設定（jsdom 環境）
+├─ eslint.config.mjs    # ESLint 設定（flat config）
+├─ .nvmrc               # 開発用 Node バージョン（22）
+├─ .editorconfig        # エディタ共通設定
+├─ .gitattributes       # 改行コード等の Git 属性
+├─ icons/               # 拡張機能アイコン
+├─ scripts/
+│  ├─ generate-icons.mjs # アイコン生成スクリプト（依存なし）
+│  └─ make-zip.mjs       # 配布 zip 生成スクリプト（依存なし）
+├─ src/
+│  ├─ content.ts        # CSS を注入するブートストラップ content script
+│  ├─ lib/
+│  │  ├─ types.ts       # 型定義
+│  │  ├─ storage.ts     # chrome.storage アクセス層
+│  │  └─ inject.ts      # CSS 注入ロジック（style 要素の適用・解除）
+│  ├─ popup/            # ツールバーのポップアップ UI
+│  └─ options/          # オプションページ（一覧・import/export）
+├─ test/                # テスト補助（chrome フェイク・セットアップ）
+├─ release/             # 配布 zip の出力先（Git 管理外）
+└─ docs/                # 設計ドキュメント（VitePress でサイト公開）
+```
+
 ## データフロー（設定の保存と反映）
 
 ```mermaid
