@@ -24,7 +24,7 @@
 
 ## 動作要件
 
-- Node.js >= 18
+- Node.js >= 20（開発は `.nvmrc` の 22 を推奨）
 - Google Chrome（または Chromium 系ブラウザ）
 
 ## セットアップ
@@ -120,15 +120,21 @@ npm run zip
 override-styles/
 ├─ manifest.config.ts   # MV3 マニフェスト定義
 ├─ vite.config.ts       # Vite + crxjs 設定
+├─ vitest.config.ts     # Vitest 設定（jsdom 環境）
+├─ eslint.config.mjs    # ESLint 設定（flat config）
+├─ .nvmrc               # 開発用 Node バージョン（22）
+├─ .editorconfig        # エディタ共通設定
+├─ .gitattributes       # 改行コード等の Git 属性
 ├─ icons/               # 拡張機能アイコン
 ├─ scripts/
 │  ├─ generate-icons.mjs # アイコン生成スクリプト（依存なし）
 │  └─ make-zip.mjs       # 配布 zip 生成スクリプト（依存なし）
 ├─ src/
-│  ├─ content.ts        # CSS を注入する content script
+│  ├─ content.ts        # CSS を注入するブートストラップ content script
 │  ├─ lib/
 │  │  ├─ types.ts       # 型定義
-│  │  └─ storage.ts     # chrome.storage アクセス層
+│  │  ├─ storage.ts     # chrome.storage アクセス層
+│  │  └─ inject.ts      # CSS 注入ロジック（style 要素の適用・解除）
 │  ├─ popup/            # ツールバーのポップアップ UI
 │  └─ options/          # オプションページ（一覧・import/export）
 ├─ test/                # テスト補助（chrome フェイク・セットアップ）
