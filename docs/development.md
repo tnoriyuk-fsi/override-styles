@@ -49,7 +49,10 @@ npm run build
 npm run lint         # ESLint チェック
 npm run format       # Prettier で整形
 npm run format:check # 整形差分のチェック（変更しない）
+npm run audit        # 依存関係の脆弱性監査（audit-ci）
 ```
+
+`npm run audit` の許容運用（allowlist / 有効期限）は [セキュリティ](./security.md#依存関係の脆弱性監査) と [ADR-0002](./adr/0002-vulnerability-allowlist-tracking.md) を参照。
 
 ## コミット時の自動整形
 
@@ -66,7 +69,7 @@ npm run format:check # 整形差分のチェック（変更しない）
 PR を出す前に、CI と同等のチェックがすべて緑であることを確認します。
 
 ```bash
-npm run lint && npm run format:check && npm run build && npm test
+npm run lint && npm run format:check && npm run build && npm test && npm run audit
 ```
 
 ## ブランチ運用
