@@ -103,11 +103,8 @@ describe('options 行操作', () => {
 
 describe('options インポート/エクスポート', () => {
   it('エクスポートで download 付きアンカーが生成される', async () => {
-    vi.stubGlobal('URL', {
-      ...URL,
-      createObjectURL: vi.fn().mockReturnValue('blob:fake'),
-      revokeObjectURL: vi.fn(),
-    });
+    vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:fake');
+    vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {});
     const clickSpy = vi
       .spyOn(HTMLAnchorElement.prototype, 'click')
       .mockImplementation(() => {});
