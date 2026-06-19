@@ -1,0 +1,49 @@
+{
+  // $schema により対応エディタで補完が効く
+  "$schema": "https://github.com/IBM/audit-ci/raw/main/docs/schema.json",
+
+  // moderate 以上の脆弱性で CI を失敗させる
+  "moderate": true,
+
+  // 許容リスト（allowlist）
+  //
+  // ここに載っていない脆弱性が出たら CI は失敗する（= 新規問題として必ず気づく）。
+  // 各エントリには expiry（有効期限）を設定し、期限が切れると CI が落ちる
+  // （= 「まだ許容してよいか」を強制的に再点検するトリガーになる）。
+  //
+  // 許容の前提（2026-06-19 時点）:
+  //   下記はすべて vitepress が内部固定する vite5 → esbuild チェーン由来。
+  //   docs サイトのビルド専用であり、配布する拡張本体（vite8 でビルド）には影響しない。
+  //   いずれも fixAvailable:false で、恒久解消には vitepress 2 が必要（現状 alpha のみ）。
+  //   詳細は docs/adr/0002-脆弱性の許容と追跡方針.md を参照。
+  "allowlist": [
+    {
+      "GHSA-67mh-4wv8-2f99": {
+        "active": true,
+        "notes": "esbuild (moderate): vitepress 固定 vite5 由来。docs ビルド専用で拡張本体に非影響。fixAvailable:false。",
+        "expiry": "2026-09-30",
+      },
+    },
+    {
+      "GHSA-4w7w-66w2-5vf9": {
+        "active": true,
+        "notes": "vite (moderate, path traversal): vitepress 固定 vite5 由来。docs ビルド専用。fixAvailable:false。",
+        "expiry": "2026-09-30",
+      },
+    },
+    {
+      "GHSA-v6wh-96g9-6wx3": {
+        "active": true,
+        "notes": "launch-editor (moderate): vitepress 固定 vite5 の依存。docs ビルド専用。fixAvailable:false。",
+        "expiry": "2026-09-30",
+      },
+    },
+    {
+      "GHSA-fx2h-pf6j-xcff": {
+        "active": true,
+        "notes": "vite (high, server.fs.deny bypass on Windows): vitepress 固定 vite5 由来。docs ビルド専用で拡張本体に非影響。fixAvailable:false。",
+        "expiry": "2026-09-30",
+      },
+    },
+  ],
+}

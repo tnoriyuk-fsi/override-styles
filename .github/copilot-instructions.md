@@ -17,6 +17,7 @@
 | テスト         | `npm test`（`vitest run`） |
 | テスト（監視） | `npm run test:watch`   |
 | カバレッジ     | `npm run test:cov`     |
+| 脆弱性監査     | `npm run audit`（`audit-ci --config ./audit-ci.jsonc`） |
 | Lint           | `npm run lint`         |
 | 整形           | `npm run format`       |
 | 整形チェック   | `npm run format:check` |
@@ -36,7 +37,7 @@
 - フレームワークは Vitest + jsdom。テストは実装と同じ場所に `*.test.ts` で置く。
 - `chrome` API は `test/fakeChrome.ts` のインメモリ実装を `test/setup.ts` で注入する（実ブラウザ不要）。
 - `src/lib/`（`storage.ts` / `inject.ts`）はロジックの中核なのでカバレッジ 100% を維持する。
-- 変更を加えたら必ず `npm run lint && npm run format:check && npm run build && npm test` がすべて緑であることを確認してから PR を出す（CI と同等）。
+- 変更を加えたら必ず `npm run lint && npm run format:check && npm run build && npm test && npm run audit` がすべて緑であることを確認してから PR を出す（CI と同等）。
 
 ## アーキテクチャ要点
 
