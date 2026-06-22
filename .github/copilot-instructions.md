@@ -158,6 +158,14 @@ BREAKING CHANGE: page_size 未指定時の既定値が変わるため、
 Refs: #789
 ```
 
+## Bot の自動コミットは対象外
+
+Dependabot 等の Bot は emoji を付与できないため、このルール（emoji 必須）の**対象外**とする。
+
+- Bot は [`.github/dependabot.yml`](./dependabot.yml) の `commit-message.prefix` 設定に従い、`build(deps): ...`（npm 依存）や `ci: ...`（GitHub Actions）のように **emoji なし**でコミットする。
+- これは許容される例外であり、**人手のコミットは従来どおり type と emoji を必須**とする。
+- 将来 commitlint を導入する場合も、この Bot 例外を前提に設定する（emoji 必須を機械強制すると Bot コミットが弾かれるため）。
+
 ## Copilot への指示
 
 - 生成対象がコミットメッセージのとき、このルールを最優先する。
