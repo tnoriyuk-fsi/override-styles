@@ -12,6 +12,8 @@
 nvm use
 ```
 
+> Node バージョンの単一情報源は [`.nvmrc`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/.nvmrc)（開発推奨版）。CI（`actions/setup-node`）も `node-version-file: .nvmrc` でこれを参照するため、バージョン更新は `.nvmrc` の 1 箇所で済む。`package.json` の `engines.node`（`>=20`）は動作を保証する**下限**を示す別目的の値で、`.nvmrc` とは役割が異なる。
+
 ## セットアップ
 
 ```bash
