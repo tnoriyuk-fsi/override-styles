@@ -2,7 +2,7 @@
 
 ## バージョニング
 
-[Semantic Versioning](https://semver.org/lang/ja/) に従う（`MAJOR.MINOR.PATCH`）。バージョンは [`package.json`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/package.json) と [`manifest.config.ts`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/manifest.config.ts) で一致させる。
+[Semantic Versioning](https://semver.org/lang/ja/) に従う（`MAJOR.MINOR.PATCH`）。バージョンの単一情報源（SSOT）は [`package.json`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/package.json) の `version`。[`manifest.config.ts`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/manifest.config.ts) はこれを import して参照するため、バージョン更新は `package.json` の 1 箇所だけで済む。
 
 ## 配布用 zip の作成
 
