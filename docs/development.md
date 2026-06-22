@@ -20,6 +20,15 @@ nvm use
 npm install
 ```
 
+## エディタ設定（VS Code）
+
+リポジトリに [`.vscode/`](https://github.com/tnoriyuk-fsi/override-styles/tree/main/.vscode) を同梱しており、clone 後すぐに同じ開発体験が得られます。
+
+- [`.vscode/extensions.json`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/.vscode/extensions.json): ESLint・Prettier・Vitest の拡張を推奨表示（初回オープン時にインストールを促すポップアップが出ます）
+- [`.vscode/settings.json`](https://github.com/tnoriyuk-fsi/override-styles/blob/main/.vscode/settings.json): 保存時に Prettier で整形（`editor.formatOnSave`）し、ESLint の自動修正（`source.fixAll.eslint`）を適用
+
+保存時整形はあくまで開発中の利便のためで、最終的な整形・Lint の担保は husky/lint-staged（コミット時）と CI です。
+
 ## 開発サーバ
 
 ```bash
