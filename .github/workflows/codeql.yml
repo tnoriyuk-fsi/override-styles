@@ -1,0 +1,44 @@
+name: CodeQL
+
+# 自前コードの静的セキュリティ解析（SAST）。結果は Security タブ（code scanning）に集約する。
+# 依存パッケージの脆弱性は audit-ci（npm run audit）が別レイヤで担当する。
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '23 4 * * 1' # 毎週月曜（UTC）に定期スキャン
+  workflow_dispatch:
+
+# 同一参照のスキャンは 1 つに制限し、進行中の実行は中断する。
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write # code scanning アラートの書き込み
+      actions: read
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [javascript-typescript]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@dd903d2e4f5405488e5ef1422510ee31c8b32357 # v3.36.2
+        with:
+          languages: ${{ matrix.language }}
+          # queries 未指定 = 既定スイート（高精度・低ノイズ）。必要に応じて security-extended に拡張可能。
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@dd903d2e4f5405488e5ef1422510ee31c8b32357 # v3.36.2
+        with:
+          category: '/language:${{ matrix.language }}'
