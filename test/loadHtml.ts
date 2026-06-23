@@ -13,6 +13,7 @@ export function loadBodyInto(relPathFromSrc: string): void {
     resolve(here, '..', 'src', relPathFromSrc),
     'utf-8',
   );
-  const body = html.match(/<body[^>]*>([\s\S]*)<\/body>/)?.[1] ?? '';
-  document.body.innerHTML = body.replace(/<script[\s\S]*?<\/script>/g, '');
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+  doc.querySelectorAll('script').forEach((script) => script.remove());
+  document.body.innerHTML = doc.body.innerHTML;
 }
